@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI at Amex – Supercharging Digital Product Management</title>
+  <style>
+    /* Basic resets */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      background-color: #f5f7fa;
+      color: #002663;
+    }
+    /* Navigation bar */
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #006ad2;
+      color: #ffffff;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+    }
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+    nav li {
+      margin-left: 1.5rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding-bottom: 0.25rem;
+      position: relative;
+    }
+    nav a:hover, nav a:focus {
+      color: #e0efff;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: #ffffff;
+      transition: width 0.3s;
+    }
+    nav a:hover::after, nav a:focus::after {
+      width: 100%;
+    }
+    /* Hero section */
+    .hero {
+      /* AI‑inspired hero image with blue tones and far‑left aligned AI lettering.
+         The new image keeps the graphic to the extreme left and leaves plenty
+         of breathing room on the right for overlay text. */
+      background-image: url('hero_ai_moved.png');
+      background-size: cover;
+      /* Position the background so the AI lettering sits on the far left and does not
+         overlap with the main heading */
+      background-position: left center;
+      background-repeat: no-repeat;
+      padding: 6rem 1rem;
+      position: relative;
+      color: #ffffff;
+      /* ensure the hero covers enough height so underlying content doesn't peek through */
+      min-height: 60vh;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* lighten the overlay so the hero image is more visible */
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.45) 35%, rgba(0, 0, 0, 0.55) 100%);
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #006ad2;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #e0efff;
+    }
+    /* General section styles */
+    section {
+      padding: 4rem 1rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #004385;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .subheading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0059a5;
+      margin-bottom: 0.75rem;
+    }
+    /* Timeline section */
+    .timeline-intro {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: #002663;
+    }
+    .timeline-wrapper {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .timeline-item {
+      position: relative;
+      /* width adjusted so that all six items fit on a single row on desktop */
+      width: 140px;
+      margin: 0 0.5rem 3rem;
+      text-align: center;
+    }
+    .timeline-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin: 0 auto 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-icon.chatgpt {
+      background-color: #00a171;
+    }
+    .timeline-icon.copilot {
+      background-color: #006ad2;
+    }
+
+    /* Logo images inside timeline icons */
+    .timeline-icon img {
+      width: 75%;
+      height: 75%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    /* Inline logo used in timeline description */
+    .inline-logo {
+      /* Slightly larger size so the rosette and swirl logos are recognizable
+         when used inline with text */
+      width: 22px;
+      height: 22px;
+      vertical-align: middle;
+      object-fit: contain;
+      margin: 0 2px;
+    }
+    .timeline-date {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #004385;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-label {
+      font-size: 0.8rem;
+      color: #002663;
+    }
+    .timeline-line {
+      position: absolute;
+      top: 16px;
+      left: calc(50% + 16px);
+      height: 2px;
+      background-color: #99c2e0;
+      /* match the new width of timeline items */
+      width: 140px;
+    }
+    .timeline-item:last-child .timeline-line {
+      display: none;
+    }
+    /* Guidelines section */
+    .guidelines-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .guidelines-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      border: 1px solid #dfe6ee;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .guidelines-table th,
+    .guidelines-table td {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid #dfe6ee;
+      text-align: left;
+    }
+    .guidelines-table th {
+      /* darker header row for better contrast */
+      background-color: #006ad2;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .guidelines-table td {
+      color: #002663;
+    }
+    .guidelines-table .check {
+      color: #00a171;
+      font-weight: bold;
+    }
+
+    .guidelines-table tbody tr:nth-child(even) {
+      background-color: #f3f9fe;
+    }
+    .guidelines-do-dont {
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-radius: 6px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .guidelines-do-dont h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #004385;
+    }
+    /* Do/Don't lists layout */
+    .do-dont-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .do-col, .dont-col {
+      flex: 1 1 280px;
+    }
+    .do-col h4, .dont-col h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #004385;
+    }
+    .do-list, .dont-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .do-list li, .dont-list li {
+      margin-bottom: 0.4rem;
+      padding-left: 0;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+    .do-list li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      font-size: 0.9rem;
+      line-height: 1.1rem;
+      color: #00a171;
+      font-weight: bold;
+    }
+    .dont-list li::before {
+      content: '✖';
+      position: absolute;
+      left: 0;
+      font-size: 0.9rem;
+      line-height: 1.1rem;
+      color: #d91e18;
+      font-weight: bold;
+    }
+    /* Important section */
+    .important-content {
+      margin-top: 1.5rem;
+    }
+    .important-content ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1rem;
+    }
+    .important-content li {
+      margin-bottom: 0.5rem;
+    }
+    .important-content a {
+      color: #006ad2;
+      text-decoration: none;
+    }
+    .important-content a:hover {
+      text-decoration: underline;
+    }
+    .important-box {
+      /* refreshed caution box styling */
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-left: 4px solid #006ad2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .important-box p {
+      margin-bottom: 0.6rem;
+      font-size: 0.98rem;
+      color: #004385;
+    }
+    .important-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .important-box ul li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+      color: #002663;
+    }
+    .important-box ul li::before {
+      /* use a warning icon for caution bullets */
+      content: '⚠';
+      position: absolute;
+      left: 0;
+      color: #f5a623;
+      font-weight: bold;
+    }
+    .example-box {
+      background-color: #f0f6fc;
+      border-left: 4px solid #006ad2;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    /* Important cards grid */
+    .important-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .important-card {
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-radius: 6px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .important-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+    .important-card h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: #004385;
+    }
+    .important-card p {
+      font-size: 0.9rem;
+      color: #002663;
+      margin-bottom: 0.5rem;
+    }
+    .important-card a {
+      background-color: #006ad2;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    .important-card a:hover {
+      background-color: #004f9e;
+    }
+    /* Resources section */
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .resource-card {
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-radius: 6px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+    }
+    .resource-card h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: #004385;
+    }
+    .resource-card p {
+      font-size: 0.9rem;
+      color: #002663;
+      margin-bottom: 0.5rem;
+    }
+    .resource-card a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background-color: #006ad2;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    /* Hover effect for resource cards */
+    .resource-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+    .resource-card a:hover {
+      background-color: #004f9e;
+    }
+    /* Features section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-radius: 6px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .feature-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-right: 0.75rem;
+    }
+    .feature-icon.available { background-color: #00a171; }
+    .feature-icon.pilot { background-color: #f5a623; }
+    .feature-icon.future { background-color: #d91e18; }
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #004385;
+    }
+    .feature-description {
+      font-size: 0.9rem;
+      color: #002663;
+      flex-grow: 1;
+    }
+
+    /* Feature card hover effect */
+    .feature-card:hover {
+      /* a little lift and subtle scale on hover */
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    /* enlarge the icon on hover */
+    .feature-card:hover .feature-img {
+      transform: scale(1.12);
+    }
+
+    /* Icon images within feature cards */
+    .feature-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+      margin-right: 0.75rem;
+      transition: transform 0.3s;
+    }
+
+    /* Status dots for feature availability */
+    .feature-status {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .feature-status.available { background-color: #006ad2; }
+    .feature-status.pilot { background-color: #f5a623; }
+    .feature-status.future { background-color: #d91e18; }
+    /* Demo section */
+    .demo-story {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .demo-step {
+      display: flex;
+      align-items: flex-start;
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .demo-step-number {
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      background-color: #006ad2;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+    }
+    .demo-step-content {
+      flex-grow: 1;
+    }
+    .demo-step-content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #004385;
+      margin-bottom: 0.25rem;
+    }
+    .demo-step-content p {
+      font-size: 0.88rem;
+      color: #002663;
+    }
+    /* Prompting section */
+    .prompt-templates {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .prompt-card {
+      background-color: #ffffff;
+      border: 1px solid #dfe6ee;
+      border-radius: 6px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .prompt-card h4 {
+      font-size: 1.1rem;
+      color: #004385;
+      margin-bottom: 0.5rem;
+    }
+    .prompt-card ol {
+      margin-left: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .prompt-card li {
+      margin-bottom: 0.4rem;
+      font-size: 0.88rem;
+      color: #002663;
+    }
+    .prompt-example {
+      background-color: #f0f6fc;
+      border-left: 3px solid #006ad2;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      color: #002663;
+      border-radius: 4px;
+    }
+    /* External tools section */
+    .external-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+    .external-table th, .external-table td {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid #dfe6ee;
+      text-align: left;
+    }
+    .external-table th {
+      background-color: #f0f6fc;
+      color: #004385;
+      font-weight: 600;
+    }
+    .external-table td {
+      color: #002663;
+    }
+    .footer {
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      background-color: #006ad2;
+      color: #ffffff;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="nav-brand">AI at Amex</div>
+      <nav>
+        <ul>
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#guidelines">Guidelines</a></li>
+          <li><a href="#important">Important</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">Live Demo</a></li>
+          <li><a href="#prompting">Prompting</a></li>
+          <li><a href="#external">External</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <!-- Hero Section -->
+    <section id="intro" class="hero">
+      <div class="hero-content">
+        <h1>AI at Amex – Supercharging Digital Product Management</h1>
+        <p>Amplify Ideas • Analyze Information • Accelerate Innovation</p>
+        <a href="#timeline" class="cta-button">Explore Our Journey</a>
+      </div>
+    </section>
+    <!-- Timeline Section -->
+    <section id="timeline">
+      <div class="container">
+        <h2 class="section-title">Timeline &amp; Adoption</h2>
+        <p class="timeline-intro">Our AI initiatives began in 2022 with pilots and have rapidly scaled across the globe. Below is a visual timeline of our rollout, showing when various colleagues gained access to ChatGPT&nbsp;Enterprise <img src="chatgpt_logo.png" class="inline-logo" alt="ChatGPT logo" /> and Microsoft&nbsp;Copilot&nbsp;Chat <img src="copilot_logo.png" class="inline-logo" alt="Copilot logo" />.</p>
+        <div class="timeline-wrapper">
+          <!-- Timeline items -->
+          <div class="timeline-item">
+            <div class="timeline-icon chatgpt"><img src="chatgpt_logo.png" alt="ChatGPT logo"></div>
+            <div class="timeline-date">Jul 15 – Aug 15</div>
+            <div class="timeline-label">Pilot – 5K colleagues in the U.S.</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon chatgpt"><img src="chatgpt_logo.png" alt="ChatGPT logo"></div>
+            <div class="timeline-date">Aug 21</div>
+            <div class="timeline-label">40K colleagues &amp; contractors in India, the U.S., Australia &amp; New Zealand</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon chatgpt"><img src="chatgpt_logo.png" alt="ChatGPT logo"></div>
+            <div class="timeline-date">Sep 15</div>
+            <div class="timeline-label">10K colleagues &amp; contractors in the UK, Argentina, Mexico &amp; Canada</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon chatgpt"><img src="chatgpt_logo.png" alt="ChatGPT logo"></div>
+            <div class="timeline-date">Oct 6</div>
+            <div class="timeline-label">10K contractors in India &amp; the U.S.</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon copilot"><img src="copilot_logo.png" alt="Copilot logo"></div>
+            <div class="timeline-date">Oct 15 – Oct 22</div>
+            <div class="timeline-label">Copilot only: 10K contractors in India &amp; U.S.; 35K Customer Care Professionals globally</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon chatgpt"><img src="chatgpt_logo.png" alt="ChatGPT logo"></div>
+            <div class="timeline-date">Nov 17</div>
+            <div class="timeline-label">10K colleagues &amp; contractors in additional global markets – final phase</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Guidelines Section -->
+    <section id="guidelines">
+      <div class="container">
+        <h2 class="section-title">Gen&nbsp;AI Usage Guidelines</h2>
+        <div class="guidelines-grid">
+          <!-- Table -->
+          <div>
+            <table class="guidelines-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Public&nbsp;Data</th>
+                  <th>AXP&nbsp;Public</th>
+                  <th>AXP&nbsp;Internal</th>
+                  <th>AXP&nbsp;Restricted</th>
+                  <th>AXP&nbsp;Secret</th>
+                  <th>Restrictions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ChatGPT row first -->
+                <tr>
+                  <td><strong>ChatGPT&nbsp;Enterprise</strong> (browser)</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td>Approved for all AXP data; do not include PII (names, email addresses, phone numbers, card details) or other data that could identify a colleague, customer or prospect.</td>
+                </tr>
+                <tr>
+                  <td><strong>Microsoft&nbsp;365&nbsp;Copilot</strong> (Word, Excel, Outlook, etc.)</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td class="check">✓</td>
+                  <td>Approved for all AXP data; do not include sensitive personal information.</td>
+                </tr>
+                <tr>
+                  <td><strong>Microsoft&nbsp;Copilot&nbsp;Chat</strong> (browser)</td>
+                  <td class="check">✓</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Approved only for internet searches of public data. Do not use AXP data in this tool.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Do & Don't card -->
+          <div class="guidelines-do-dont">
+            <h3>Quick Scan: Do &amp; Don’t</h3>
+            <div class="do-dont-container">
+              <div class="do-col">
+                <h4>Do:</h4>
+                <ul class="do-list">
+                  <li>Use approved tools with the right data classifications.</li>
+                  <li>Apply company frameworks and context when prompting.</li>
+                  <li>Summarize chats monthly and store sanitized notes (exclude PII).</li>
+                  <li>Reach out to GCO/IPLS when in doubt about IP or data.</li>
+                </ul>
+              </div>
+              <div class="dont-col">
+                <h4>Don’t:</h4>
+                <ul class="dont-list">
+                  <li>Include personal or colleague PII (names, emails, phone numbers).</li>
+                  <li>Input trade secrets, roadmaps, or marketing plans without approval.</li>
+                  <li>Use third‑party IP externally without proper rights.</li>
+                  <li>Rely on Copilot Chat for anything other than public research.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Important Section -->
+    <section id="important">
+      <div class="container">
+        <h2 class="section-title">Very Important Content</h2>
+        <div class="important-grid">
+          <!-- M365 Copilot Rules Card -->
+          <div class="important-card">
+            <h4>M365 Copilot Usage Rules</h4>
+            <p>Review official guidelines for using Microsoft&nbsp;365&nbsp;Copilot. Learn about approved use cases, data restrictions and compliance requirements.</p>
+            <a href="https://www.google.com" target="_blank" rel="noopener">Read the rules</a>
+          </div>
+          <!-- ChatGPT Terms Card -->
+          <div class="important-card">
+            <h4>ChatGPT Enterprise Terms of Use</h4>
+            <p>Understand the terms of using ChatGPT&nbsp;Enterprise at Amex. Know what data you can input, privacy considerations and best practices.</p>
+            <a href="https://www.amex.com" target="_blank" rel="noopener">Read the terms</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Resources Section -->
+    <section id="resources">
+      <div class="container">
+        <h2 class="section-title">AI Resources &amp; Support</h2>
+        <div class="resources">
+          <div class="resource-card">
+            <h4>Gen&nbsp;AI Overview &amp; Risk Training</h4>
+            <p>Complete this mandatory training to learn how to responsibly use generative AI tools at Amex.</p>
+            <a href="#" target="_blank" rel="noopener">Take Training</a>
+          </div>
+          <div class="resource-card">
+            <h4>300+ AI Foundation Videos</h4>
+            <p>Explore the basics of AI, machine learning and prompt engineering in our curated video library.</p>
+            <a href="#" target="_blank" rel="noopener">Watch Now</a>
+          </div>
+          <div class="resource-card">
+            <h4>Amex AI Hub</h4>
+            <p>Visit the Square page to review guidelines, rollout schedules and resources in one place.</p>
+            <a href="#" target="_blank" rel="noopener">Visit AI Hub</a>
+          </div>
+          <div class="resource-card">
+            <h4>Slack Community</h4>
+            <p>Join the chatgpt-enterprise-announcements channel to get updates and share tips.</p>
+            <a href="#" target="_blank" rel="noopener">Join Slack</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features Section -->
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">ChatGPT Capabilities &amp; Tools</h2>
+        <p class="timeline-intro">Explore the breadth of features available in ChatGPT Enterprise and see what's on the horizon. Badges indicate availability: <strong>blue</strong> for available, orange for pilot/beta, red for future roadmap.</p>
+        <div class="features-grid">
+          <!-- Chat -->
+          <div class="feature-card">
+            <span class="feature-status available"></span>
+            <div class="feature-header">
+              <img class="feature-img" src="chat_icon.png" alt="Chat icon">
+              <div class="feature-title">Chat</div>
+            </div>
+            <div class="feature-description">
+              Natural conversation, Q&amp;A and summarization. Configure ChatGPT to act as a digital PM, generate user stories, acceptance criteria, PRDs and PR FAQs using tailored instructions. Great for drafting communications, status updates and competitive analyses.
+            </div>
+          </div>
+          <!-- Custom GPTs -->
+          <div class="feature-card">
+            <span class="feature-status available"></span>
+            <div class="feature-header">
+              <img class="feature-img" src="custom_icon.png" alt="Custom GPTs icon">
+              <div class="feature-title">Custom&nbsp;GPTs</div>
+            </div>
+            <div class="feature-description">
+              Build personalized assistants that follow company frameworks (e.g., PRDs, PR FAQs) and enforce the right tone. Provide context and prompt templates so your Custom GPT can automate repetitive tasks, generate docs in various formats and deliver insights aligned with Amex standards.
+            </div>
+          </div>
+
+          <!-- Codex -->
+          <div class="feature-card">
+            <!-- Codex is currently not available, so no status dot -->
+            <div class="feature-header">
+              <img class="feature-img" src="codex_icon.png" alt="Codex icon">
+              <div class="feature-title">Codex</div>
+            </div>
+            <div class="feature-description">
+              Code generation and technical scripting assistant. Draft Python, SQL and CLI commands, debug and optimize code, and convert pseudocode into working prototypes. Enhance developer productivity across languages.
+            </div>
+          </div>
+          <!-- Canvas -->
+          <div class="feature-card">
+            <span class="feature-status available"></span>
+            <div class="feature-header">
+              <img class="feature-img" src="canvas_icon.png" alt="Canvas icon">
+              <div class="feature-title">Canvas</div>
+            </div>
+            <div class="feature-description">
+              A collaborative workspace where you can co‑edit documents and code with ChatGPT. Compare changes, restore previous versions and edit specific sections. Canvas includes version control and collaborative editing built directly into your AI workflow, so your team can iterate side&nbsp;by&nbsp;side without waiting for a pilot program.
+            </div>
+          </div>
+          <!-- Projects -->
+          <div class="feature-card">
+            <span class="feature-status available"></span>
+            <div class="feature-header">
+              <img class="feature-img" src="projects_icon.png" alt="Projects icon">
+              <div class="feature-title">Projects</div>
+            </div>
+            <div class="feature-description">
+              Organize conversations by workstream, upload files, and maintain long‑term memory. Projects keep context across sessions, making it easy to iterate on designs, track decisions and collaborate with your team through the lifecycle of a product.
+            </div>
+          </div>
+          <!-- Scheduled Tasks -->
+          <div class="feature-card">
+            <span class="feature-status available"></span>
+            <div class="feature-header">
+              <img class="feature-img" src="tasks_icon.png" alt="Scheduled Tasks icon">
+              <div class="feature-title">Scheduled&nbsp;Tasks</div>
+            </div>
+            <div class="feature-description">
+              Automate reminders and periodic workflows. Set monthly tasks to summarize chats from the last 90 days and save sanitized learnings. Use scheduled tasks to fetch market updates, send meeting prep packages, or trigger analyses at regular intervals.
+            </div>
+          </div>
+          <!-- Agents -->
+          <div class="feature-card">
+            <!-- no badge for future features -->
+            <div class="feature-header">
+              <img class="feature-img" src="agents_icon.png" alt="Agents icon">
+              <div class="feature-title">Agents</div>
+            </div>
+            <div class="feature-description">
+              Fully autonomous workflows that can take multi‑step actions across your tools (e.g., update JIRA, draft an email and create a slide). Agents are on the roadmap and will enable “AI teammates” to handle busywork end‑to‑end.
+            </div>
+          </div>
+          <!-- Sora -->
+          <div class="feature-card">
+            <!-- no badge for future features -->
+            <div class="feature-header">
+              <img class="feature-img" src="sora_icon.png" alt="Sora icon">
+              <div class="feature-title">Sora</div>
+            </div>
+            <div class="feature-description">
+              A multimodal video generator that transforms text into short films and prototypes. Sora is still in development; imagine quickly pitching ideas with AI‑generated video storyboards and interactive demos.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Live Demo Section -->
+    <section id="demo">
+      <div class="container">
+        <h2 class="section-title">5.1 Live Demo</h2>
+        <p class="timeline-intro">Follow a Digital Product Manager through a quick showcase of ChatGPT Enterprise in action.</p>
+        <div class="demo-story">
+          <div class="demo-step">
+            <div class="demo-step-number">1</div>
+            <div class="demo-step-content">
+              <h4>Settings Overview</h4>
+              <p>Navigate the ChatGPT Enterprise interface, configure preferences and review custom instructions for your role.</p>
+            </div>
+          </div>
+          <div class="demo-step">
+            <div class="demo-step-number">2</div>
+            <div class="demo-step-content">
+              <h4>Creating a PRD with Custom GPT</h4>
+              <p>Use a pre‑configured custom assistant to generate a product requirements document and PR FAQs from a feature description.</p>
+            </div>
+          </div>
+          <div class="demo-step">
+            <div class="demo-step-number">3</div>
+            <div class="demo-step-content">
+              <h4>Collaborating on Canvas</h4>
+              <p>Co‑edit a specification in real time with your team: compare changes, restore versions and edit specific sections using Canvas.</p>
+            </div>
+          </div>
+          <div class="demo-step">
+            <div class="demo-step-number">4</div>
+            <div class="demo-step-content">
+              <h4>Creating a Project Workspace</h4>
+              <p>Set up a project for ongoing collaboration. Organize conversations, upload files and maintain context across sessions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Prompting Tips & Templates Section -->
+    <section id="prompting">
+      <div class="container">
+        <h2 class="section-title">Prompting Tips &amp; Templates</h2>
+        <div class="prompt-templates">
+          <div class="prompt-card">
+            <h4>Structured Output Template</h4>
+            <ol>
+              <li><strong>Role/Context:</strong> Describe who ChatGPT should be (e.g., “You are a Digital PM refining a user story…”).</li>
+              <li><strong>Task/Goal:</strong> Clearly state what you need (“Draft 5 acceptance criteria for this feature”).</li>
+              <li><strong>Format:</strong> Specify output style (“Present as a table with columns ID, Criteria, Priority”).</li>
+              <li><strong>Constraints:</strong> Add rules or extras (“Use plain language, avoid technical jargon”).</li>
+            </ol>
+            <div class="prompt-example">You are a Digital PM helping refine requirements. Given the following feature description, draft 5 acceptance criteria. Present them in a table with columns ID, Criteria, Priority. Keep criteria short and business‑friendly.</div>
+          </div>
+          <div class="prompt-card">
+            <h4>Research &amp; Brainstorming Template</h4>
+            <ol>
+              <li><strong>Role:</strong> Set the creative mode (“You are an AI researcher exploring new product ideas…”).</li>
+              <li><strong>Task:</strong> Define the research question (“Brainstorm 3 innovative features for a travel app competing with Airbnb”).</li>
+              <li><strong>Output:</strong> Choose the format (“Provide bullet points with pros &amp; cons and potential impact”).</li>
+              <li><strong>Extras:</strong> Include boundaries (“Consider market trends and competitor offerings; cite at least two sources if possible”).</li>
+            </ol>
+            <div class="prompt-example">You are an AI researcher exploring new product ideas. Brainstorm 3 innovative features for a travel app competing with Airbnb. Provide bullet points with pros &amp; cons and potential impact. Consider market trends and competitor offerings.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- External Tools Section -->
+    <section id="external">
+      <div class="container">
+        <h2 class="section-title">External AI Tools &amp; Why Not at Amex</h2>
+        <p class="timeline-intro">Several exciting AI services exist outside our approved toolset. Here’s a snapshot of what they do and why they aren’t yet part of the Amex ecosystem.</p>
+        <table class="external-table">
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google&nbsp;Gemini</td>
+              <td>Large multimodal AI service combining text, images, and code with strong design and coding capabilities.</td>
+            </tr>
+            <tr>
+              <td>Notebook&nbsp;LM</td>
+              <td>An AI note‑taking assistant and research companion by Google that synthesizes long documents.</td>
+            </tr>
+            <tr>
+              <td>Perplexity&nbsp;AI</td>
+              <td>A powerful research assistant that provides answers with citations from the open web.</td>
+            </tr>
+            <tr>
+              <td>Claude (Anthropic)</td>
+              <td>A long‑context language model with robust reasoning abilities and strong safety guardrails.</td>
+            </tr>
+            <tr>
+              <td>Other&nbsp;Emerging</td>
+              <td>Innovations like Grok and open‑source models that may offer niche features.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>&copy; 2025 American Express. All rights reserved. Use AI responsibly and securely.</p>
+  </footer>
+</body>
+</html>
