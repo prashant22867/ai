@@ -1,0 +1,62 @@
+1. Executive Summary
+We are transitioning to a modern Insurance-as-a-Service (IaaS) Ecosystem designed to transform how we define, distribute, and manage insurance. This platform will serve as the foundation for rapid growth, enabling us to launch products faster and reach customers through any channel.
+
+Core Objectives:
+
+Market Agility: Drastically reduce the time required to launch and iterate on new products (Travel, Auto, Pet).
+Universal Distribution: Enable "plug-and-play" partnerships, allowing us to sell through any website, app, or API.
+Operational Efficiency: Automate the policy lifecycle to lower costs and improve data accuracy.
+1.1 Strategic Scope: Build vs. Buy
+To maximize speed and competitive advantage, we are making explicit architectural choices on where to innovate versus where to integrate.
+
+Strategy	Domain / Capability	Description
+We will BUILD (Core IP)	Core Policy Management	The central "system of record" for all contracts and lifecycle events.
+We will BUILD (Core IP)	Sales Frontends	Direct-to-consumer websites and partner portals.
+We will BUILD (Core IP)	Claims Intake (FNOL)	The web-based "First Notice of Loss" experience for customer submission.
+We will BUY (Partner)	Claims Adjudication	Complex decisioning and settlement orchestration will be handled by a specialized 3rd-party tool.
+1.2 Strategic Business Value
+Strategic Driver	Current Operational Reality	Target Business Outcome
+Time-to-Market	Slow & Expensive: Launching products requires months of custom coding and testing.	Rapid & Agile: Products launched in days via simple configuration; enables fast market testing.
+Partner Growth	High Friction: Onboarding new partners is a heavy, bespoke IT project.	Frictionless: Partners connect instantly via standard APIs, accelerating channel expansion.
+Customer Experience	Siloed: Disjointed interactions often requiring manual intervention or paper.	Seamless: Instant, real-time digital experiences (quote, bind, and claims) on any device.
+Scalability	Constrained: Legacy infrastructure struggles with peak traffic and volume spikes.	Unlimited: Cloud-native architecture automatically scales to support massive growth.
+Decision Making	Reactive: Data is locked in silos, making real-time analysis difficult.	Proactive: Unified data streams provide instant insights into risk and revenue.
+2. Ecosystem Map – The 7 Pillars
+The platform is organized into 7 domains (pillars) flowing from Definition → Execution → Strategy.
+
+Phase 1 – Definition
+P1 – The Factory (Product Domain)
+
+Universal Product Registry (master list of products: IDs, versions, status).
+Rules & Rating Studio (eligibility, pricing math, tax strategies).
+Output configuration (document + email template wiring, marketing assets).
+Legacy bridge (mapping new product IDs to mainframe service/option codes).
+Phase 2 – Execution
+P2 – The Gateway (Sales Domain)
+
+Partner API Management (keys, rate limiting, channel configuration).
+Quote orchestration (validation, smart filtering, bundles, content injection).
+P3 – The Registry (Policy Domain)
+
+Policy issuance & immutable contract record.
+Lifecycle engine (endorsements, cancellations, refunds).
+Document generation orchestration (sync/async).
+P4 – The Vault (Financial Domain)
+
+Payment orchestration & gateway integrations (e.g., Stripe/Adyen/Amex).
+Tokenization & PCI minimization.
+Ledger & reconciliation (earned vs unearned premium, settlement views).
+P5 – The Promise (Claims Domain)
+
+FNOL ingestion.
+Rules-based triage and auto-adjudication.
+Phase 3 – Strategy
+P6 – The Shield (Reinsurance Domain)
+
+Risk accumulation.
+Treaty configuration & bordereaux feeds.
+P7 – The Brain (Data Domain)
+
+Data lake / warehouse.
+Reporting & MI.
+Actuarial / pricing model inputs.
